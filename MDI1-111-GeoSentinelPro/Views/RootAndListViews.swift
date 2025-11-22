@@ -6,16 +6,31 @@ struct RootView: View {
     @EnvironmentObject var vm: GeoVM
 
     var body: some View {
-        TabView {
-            RegionListView()
-                .tabItem { Label("Regions", systemImage: "mappin.and.ellipse") }
-            MapEditorView()
-                .tabItem { Label("Map", systemImage: "map.circle") }
-            DebugConsoleView()
-                .tabItem { Label("Debug", systemImage: "terminal") }
-            SettingsView()
-                .tabItem { Label("Settings", systemImage: "gearshape") }
+        Group {
+            if vm.needsWelcomeScreen {
+                WelcomeView()
+            } else {
+                MainTabView()
+            }
         }
+        .onAppear {
+            Task {
+                await vm.bootstrap()
+            }
+        }
+        .overlay(alignment: .top) {
+            if let msg = vm.bannerMessage {
+                BannerView(message: msg)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            withAnimation { vm.bannerMessage = nil }
+                        }
+                    }
+                    .padding(.top, 20)
+            }
+        }
+        .animation(.easeInOut, value: vm.bannerMessage)
     }
 }
 
@@ -36,10 +51,24 @@ struct RegionListView: View {
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
 
-                            if let state = vm.presence[r.id]?.presence {
-                                Text(state.rawValue.capitalized)
-                                    .font(.caption2)
-                                    .foregroundStyle(.secondary)
+                            if let runtime = vm.presence[r.id] {
+                                HStack {
+                                    let p = runtime.presence
+                                    
+                                    Text(p.rawValue.capitalized)
+                                        .font(.caption2)
+                                        .foregroundColor(
+                                            p == .inside ? .green :
+                                            p == .outside ? .red : .gray
+                                        )
+                                    
+                                    // Snoozed?
+                                    if let until = runtime.snoozedUntil, until > Date() {
+                                        Text("(Snoozed)")
+                                            .font(.caption2)
+                                            .foregroundColor(.orange)
+                                    }
+                                }
                             }
                         }
 
@@ -92,6 +121,9 @@ struct RegionListView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            vm.requestInitialStates()
         }
     }
 }

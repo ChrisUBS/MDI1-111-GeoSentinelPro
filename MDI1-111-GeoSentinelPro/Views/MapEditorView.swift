@@ -19,20 +19,29 @@ struct MapEditorView: View {
                             latitude: r.latitude,
                             longitude: r.longitude
                         )
+                        
+                        let isInside = vm.presence[r.id]?.presence == .inside
 
                         Annotation(r.name, coordinate: coord) {
-                            ZStack {
-                                Circle()
-                                    .fill(.blue.opacity(0.2))
-                                    .frame(width: 14, height: 14)
-                                Circle()
-                                    .strokeBorder(.blue, lineWidth: 2)
-                                    .frame(width: 14, height: 14)
-                            }
+                            Circle()
+                                .fill(
+                                    vm.presence[r.id]?.presence == .inside
+                                        ? .green.opacity(0.3)
+                                        : .blue.opacity(0.2)
+                                )
+                                .frame(width: 14, height: 14)
+                                .overlay(
+                                    Circle()
+                                        .stroke(
+                                            vm.presence[r.id]?.presence == .inside ? .green : .blue,
+                                            lineWidth: 2
+                                        )
+                                )
                         }
 
                         MapCircle(center: coord, radius: r.radius)
-                            .stroke(.blue, lineWidth: 1)
+                            .stroke(isInside ? .green : .blue, lineWidth: 2)
+                            .foregroundStyle(isInside ? .green.opacity(0.15) : .blue.opacity(0.10))
                     }
 
                     UserAnnotation()
@@ -63,6 +72,11 @@ struct MapEditorView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Auth: \(vm.authStatusDescription)")
                     Text("Precise: \(vm.preciseEnabled.description)")
+                    if let focus = vm.regions.first(where: { $0.enabled }) {
+                        if let pres = vm.presence[focus.id]?.presence {
+                            Text("State: \(pres.rawValue.capitalized)")
+                        }
+                    }
                 }
                 .font(.caption)
                 .padding(8)

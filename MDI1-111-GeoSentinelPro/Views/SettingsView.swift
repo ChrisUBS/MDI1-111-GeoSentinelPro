@@ -22,6 +22,20 @@ struct SettingsView: View {
                 Text("System hard limit is 20.")
                     .font(.caption).foregroundStyle(.secondary)
             }
+            Section("Quiet Hours") {
+
+                Stepper("Start: \(vm.settings.quietStart):00",
+                    value: $vm.settings.quietStart,
+                    in: 0...23)
+
+                Stepper("End: \(vm.settings.quietEnd):00",
+                    value: $vm.settings.quietEnd,
+                    in: 0...23)
+
+                Text("Notifications will be silenced in this range.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
             Section {
                 Button("Save Settings") { vm.save() }
             }

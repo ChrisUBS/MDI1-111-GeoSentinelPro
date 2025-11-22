@@ -22,8 +22,13 @@ struct GeoSettings: Codable {
     var dwellSeconds: Int = 30
     var exitDebounceSeconds: Int = 20
     var batteryMode: BatteryMode = .saver
-    var maxMonitored: Int = 10 // app-side cap (≤ 20 hard limit)
+    var maxMonitored: Int = 10
+
+    // Quiet Hours
+    var quietStart: Int = 22 // 22:00 default
+    var quietEnd: Int = 7    // 07:00 default
 }
+
 
 enum RegionPresence: String, Codable { case unknown, inside, outside }
 

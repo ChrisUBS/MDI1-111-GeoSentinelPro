@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		834BFBAE2ED1390400534482 /* demo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 834BFBAD2ED1390400534482 /* demo.gif */; };
 		83D69AC92ECFD80900B140C1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 83D69AC82ECFD80900B140C1 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		83086CD92ECFF8E4005FC8EF /* GeoSentinelPro-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GeoSentinelPro-Info.plist"; sourceTree = "<group>"; };
 		83086CDA2ECFF93D005FC8EF /* GeoSentinelPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GeoSentinelPro.entitlements; sourceTree = "<group>"; };
+		834BFBAD2ED1390400534482 /* demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = demo.gif; sourceTree = "<group>"; };
 		83D69AA12ECFD63100B140C1 /* GeoSentinelPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoSentinelPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D69AC82ECFD80900B140C1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -44,6 +46,7 @@
 				83D69AA32ECFD63100B140C1 /* MDI1-111-GeoSentinelPro */,
 				83D69AA22ECFD63100B140C1 /* Products */,
 				83D69AC82ECFD80900B140C1 /* README.md */,
+				834BFBAD2ED1390400534482 /* demo.gif */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +122,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				834BFBAE2ED1390400534482 /* demo.gif in Resources */,
 				83D69AC92ECFD80900B140C1 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,6 +272,8 @@
 				INFOPLIST_FILE = "GeoSentinelPro-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -303,6 +309,8 @@
 				INFOPLIST_FILE = "GeoSentinelPro-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
